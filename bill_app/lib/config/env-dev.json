@@ -1,0 +1,8 @@
+{
+  "ENV": "PROD",
+  "SECRET_KEY": "secret",
+  "DEVELOPMENT_LANGUAGE": "en",
+  "API_URL": "",
+  "GOOGLE_MAPS_API_KEY": "",
+  "SENTRY_DSN": ""
+}
