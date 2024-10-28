@@ -25,6 +25,19 @@ namespace bill_api.Api.Controllers.Bill
 
             return Ok(bills);
         }
+        [HttpGet("{clientId}")]
+        public async Task<IActionResult> GetById(string clientId)
+        {
+            var bill = await _billService.GetByClientId(clientId);
+
+            if (bill == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(bill);
+        }
+
     }
 
 }
