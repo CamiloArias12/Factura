@@ -3,11 +3,14 @@ import 'package:bill_app/bloc/Bill/state.dart';
 import 'package:bill_app/domain/entities/bill.dart';
 import 'package:bill_app/services/bill_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 class BillBloc extends Bloc<BillEvent, BillState> {
   late final AbstractBillService billService;
 
   BillBloc() : super(BillStartState()) {
+    billService = GetIt.I.get<AbstractBillService>();
+
     on<BillFetchEvent>(_fetchAllBill);
   }
 

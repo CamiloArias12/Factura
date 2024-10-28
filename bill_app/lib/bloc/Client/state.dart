@@ -11,6 +11,6 @@ class ClientErrorState extends ClientState {}
 class ClientLoadingState extends ClientState {}
 
 class ClientLoadedState extends ClientState {
-  final List<Client> bills;
-  ClientLoadedState({required this.bills});
+  final List<Client> clients;
+  ClientLoadedState({required this.clients});
 }

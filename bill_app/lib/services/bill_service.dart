@@ -20,10 +20,9 @@ class BillService implements AbstractBillService {
     Response response = await apiService.get(path: apiRepositoryUrl);
     List<Bill> bills = [];
     final List<dynamic> listData = response.data;
-
     for (var bill in listData) {
-      final Bill roundRes = Bill.fromMap(bill);
-      bills.add(roundRes);
+      final Bill billNew = Bill.fromMap(bill);
+      bills.add(billNew);
     }
     return bills;
   }

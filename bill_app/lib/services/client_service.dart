@@ -20,10 +20,9 @@ class ClientService extends AbstractClientService {
     Response response = await apiService.get(path: apiRepositoryUrl);
     List<Client> clients = [];
     final List<dynamic> listData = response.data;
-
     for (var client in listData) {
-      final Client roundRes = Client.fromMap(client);
-      clients.add(roundRes);
+      final Client clientNew = Client.fromMap(client);
+      clients.add(clientNew);
     }
     return clients;
   }

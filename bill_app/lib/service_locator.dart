@@ -12,9 +12,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> serviceLocatorSetup() async {
-  GetIt.I.registerSingleton<AppConfig>(AppConfigImpl());
-
   GetIt.I.registerSingleton<StyleApp>(StyleAppImpl());
+  GetIt.I.registerSingleton<AppConfig>(AppConfigImpl());
 
   final Dio dio = Dio();
   GetIt.I.registerLazySingleton(() => dio);
