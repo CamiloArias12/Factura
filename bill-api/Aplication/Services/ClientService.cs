@@ -6,5 +6,6 @@ namespace client_api.Application.Services
 {
     public class ClientService(IClientRepository clientRepository) : Service<Client>(clientRepository), IClientService
     {
+
     }
 }
