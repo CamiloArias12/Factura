@@ -26,7 +26,7 @@ namespace bill_api.Persistence.Seeding
                     {
                         ClientId = client.Id,
                         BillCode = $"P-{(i + 1).ToString().PadLeft(5, '0')}",
-                        InvoiceTotal = random.Next(10000, 50000),
+                        BillTotal = random.Next(10000, 50000),
                         Subtotal = random.Next(8000, 40000),
                         VAT = random.Next(1000, 10000),
                         Withholding = random.Next(0, 5000),

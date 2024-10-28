@@ -7,7 +7,7 @@ namespace bill_api.Domain.Entities
 
         public required string BillCode { get; set; }
 
-        public double? InvoiceTotal { get; set; }
+        public double? BillTotal { get; set; }
 
         public double? Subtotal { get; set; }
 
