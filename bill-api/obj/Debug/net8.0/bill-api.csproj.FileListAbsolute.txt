@@ -37,3 +37,6 @@
 /home/camilo/company/learn/factura/bill-api/obj/Debug/net8.0/bill-api.pdb
 /home/camilo/company/learn/factura/bill-api/obj/Debug/net8.0/bill-api.genruntimeconfig.cache
 /home/camilo/company/learn/factura/bill-api/obj/Debug/net8.0/ref/bill-api.dll
+/home/camilo/company/learn/factura/bill-api/bin/Debug/net8.0/BouncyCastle.Cryptography.dll
+/home/camilo/company/learn/factura/bill-api/bin/Debug/net8.0/MailKit.dll
+/home/camilo/company/learn/factura/bill-api/bin/Debug/net8.0/MimeKit.dll

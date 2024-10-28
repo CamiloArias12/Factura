@@ -5,9 +5,7 @@ namespace bill_api.Domain.Entities
     public class Bill : BaseEntity
     {
 
-        public string? ClientId { get; set; }
-
-        public string? InvoiceCode { get; set; }
+        public required string BillCode { get; set; }
 
         public double? InvoiceTotal { get; set; }
 
@@ -26,6 +24,8 @@ namespace bill_api.Domain.Entities
         public bool? IsPaid { get; set; }
 
         public DateTime? PaymentDate { get; set; }
+
+        public string? ClientId { get; set; }
 
     }
 }

@@ -3,14 +3,9 @@ using MongoDB.Driver;
 
 namespace bill_api.Persisntace.Seed
 {
-    public class ClientSeeder
+    public class ClientSeeder(IMongoDatabase database)
     {
-        private readonly IMongoCollection<Client> _clientCollection;
-
-        public ClientSeeder(IMongoDatabase database)
-        {
-            _clientCollection = database.GetCollection<Client>("Clients");
-        }
+        private readonly IMongoCollection<Client> _clientCollection = database.GetCollection<Client>("Clients");
 
         public async Task SeedAsync()
         {
@@ -18,11 +13,11 @@ namespace bill_api.Persisntace.Seed
             {
                 var clients = new List<Client>
                 {
-                    new Client { Name = "Prueba desarrollo 1", Email = "cliente1@ejemplo.com" },
-                    new Client { Name = "Prueba desarrollo 2", Email = "cliente2@ejemplo.com" },
-                    new Client { Name = "Prueba desarrollo 3", Email = "cliente3@ejemplo.com" },
-                    new Client { Name = "Prueba desarrollo 4", Email = "cliente4@ejemplo.com" },
-                    new Client { Name = "Prueba desarrollo 5", Email = "cliente5@ejemplo.com" }
+                    new() { Name = "Prueba desarrollo 1", Email = "ariaspira13@gmail.com" },
+                    new() { Name = "Prueba desarrollo 2", Email = "ariaspira13@gmail.com" },
+                    new() { Name = "Prueba desarrollo 3", Email = "ariaspira13@gmail.com" },
+                    new() { Name = "Prueba desarrollo 4", Email = "ariaspira13@gmail.com" },
+                    new() { Name = "Prueba desarrollo 5", Email = "ariaspira13@gmail.com" }
                 };
 
                 await _clientCollection.InsertManyAsync(clients);

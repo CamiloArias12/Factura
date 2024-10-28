@@ -1,4 +1,6 @@
 
+using bill_api.Domain.Entities;
+
 namespace bill_api.Persisntace.Repositories
 {
     public interface IRepository<T>

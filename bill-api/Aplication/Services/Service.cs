@@ -2,14 +2,9 @@ using bill_api.Persisntace.Repositories;
 
 namespace bill_api.Application.Services
 {
-    public class Service<T> : IService<T> where T : class
+    public class Service<T>(IRepository<T> repository) : IService<T> where T : class
     {
-        protected readonly IRepository<T> _repository;
-
-        public Service(IRepository<T> repository)
-        {
-            _repository = repository;
-        }
+        protected readonly IRepository<T> _repository = repository;
 
         public async Task<T> GetById(string id)
         {

@@ -1,6 +1,8 @@
 
-using System.Net.Mail;
+using MailKit.Net.Smtp;
 using bill_api.Infrastructure.Email.Interfaces;
+using MimeKit;
+using MimeKit.Text;
 namespace bill_api.Infrastructure.Email
 {
 
@@ -9,18 +11,30 @@ namespace bill_api.Infrastructure.Email
     {
         private readonly SmtpConfig _mailserverConfiguration = mailserverOptions!;
 
-        public async Task SendEmail(string to, string from, string subject, string body)
+        public async Task<bool> SendEmail(EmailDTO emailDTO)
         {
-            var emailClient = new SmtpClient(_mailserverConfiguration.Hostname, _mailserverConfiguration.Port);
 
-            var message = new MailMessage
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse(_mailserverConfiguration.Username));
+            email.To.Add(MailboxAddress.Parse(emailDTO.To));
+            email.Subject = emailDTO.Subject;
+            email.Body = new TextPart(TextFormat.Html) { Text = emailDTO.Body };
+            try
             {
-                From = new MailAddress(from),
-                Subject = subject,
-                Body = body
-            };
-            message.To.Add(new MailAddress(to));
-            await emailClient.SendMailAsync(message);
+                var smtp = new SmtpClient();
+                await smtp.ConnectAsync(_mailserverConfiguration.Host, _mailserverConfiguration.Port);
+                await smtp.AuthenticateAsync(_mailserverConfiguration.Username, _mailserverConfiguration.Password);
+                await smtp.SendAsync(email);
+                await smtp.DisconnectAsync(true);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error sending email: {ex.Message}");
+                return false;
+            }
         }
+
     }
 }

@@ -1,11 +1,14 @@
 
+
 namespace bill_api.Infrastructure.Email
 {
 
-    public class SmtpConfig()
+    public class SmtpConfig
     {
-        public string Hostname { get; set; } = "localhost";
-        public int Port { get; set; } = 25;
+        public required string Host { get; set; }
+        public int Port { get; set; }
+        public required string Username { get; set; }
+        public required string Password { get; set; }
     }
 
 }

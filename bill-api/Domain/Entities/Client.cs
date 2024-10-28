@@ -5,13 +5,10 @@ namespace bill_api.Domain.Entities
 {
     public class Client : BaseEntity
     {
-
-        public string? Name { get; set; }
+        public required string Name { get; set; }
 
         [EmailAddress]
-        public string? Email { get; set; }
-
-
+        public required string Email { get; set; }
 
     }
 }

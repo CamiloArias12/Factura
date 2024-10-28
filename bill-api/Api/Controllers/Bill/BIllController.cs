@@ -5,14 +5,10 @@ namespace bill_api.Api.Controllers.Bill
 {
     [Route("api/bill")]
     [ApiController]
-    public class BillController : ControllerBase
+    public class BillController(IBillService billService) : ControllerBase
     {
-        private readonly IBillService _billService;
+        private readonly IBillService _billService = billService;
 
-        public BillController(IBillService billService)
-        {
-            _billService = billService;
-        }
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -25,16 +21,15 @@ namespace bill_api.Api.Controllers.Bill
 
             return Ok(bills);
         }
-        [HttpGet("{clientId}")]
-        public async Task<IActionResult> GetById(string clientId)
+        [HttpPost("status/{clientId}")]
+        public async Task<IActionResult> UpdateStatus(string clientId)
         {
-            var bill = await _billService.GetByClientId(clientId);
+            var bill = await _billService.UpdateStatus(clientId);
 
-            if (bill == null)
+            if (!bill)
             {
-                return NotFound();
+                return BadRequest(new { message = "Failed to update the bill status." });
             }
-
             return Ok(bill);
         }
 

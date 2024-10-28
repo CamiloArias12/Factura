@@ -1,26 +1,26 @@
 using bill_api.Application.Services;
+using bill_api.Infrastructure.Email;
+using bill_api.Infrastructure.Email.Interfaces;
 using bill_api.Persisntace.Repositories;
 using bill_api.Persisntace.Seed;
 using bill_api.Persisntence.Config;
 using bill_api.Persistence.Seeding;
 using client_api.Application.Services;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-Console.WriteLine("Hello");
 
 builder.Services.Configure<MongoSettings>(builder.Configuration.GetSection("MongoSettings"));
 
-// Register IMongoClient
 builder.Services.AddSingleton<IMongoClient>(sp =>
 {
     var settings = sp.GetRequiredService<IOptions<MongoSettings>>().Value;
     return new MongoClient(settings.ConnectionString);
 });
 
-// Register IMongoDatabase
 builder.Services.AddScoped(sp =>
 {
     var client = sp.GetRequiredService<IMongoClient>();
@@ -28,6 +28,9 @@ builder.Services.AddScoped(sp =>
     return client.GetDatabase(settings.Database);
 });
 
+builder.Services.Configure<SmtpConfig>(builder.Configuration.GetSection("EmailConfiguration"));
+builder.Services.AddSingleton(resolver => resolver.GetRequiredService<IOptions<SmtpConfig>>().Value);
+builder.Services.AddTransient<IEmailService, EmailService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IBillRepository, BillRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
@@ -39,8 +42,6 @@ builder.Services.AddScoped<IClientService, ClientService>();
 
 builder.Services.AddControllers();
 
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
@@ -54,7 +55,15 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddTransient<BillSeeder>();
 builder.Services.AddTransient<ClientSeeder>();
-
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "My API",
+        Version = "v1",
+        Description = "API documentation"
+    });
+});
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
@@ -68,7 +77,11 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            c.RoutePrefix = string.Empty;
+        });
 
 app.UseHttpsRedirection();
 
