@@ -9,9 +9,9 @@ namespace bill_api.Infrastructure.Email
     {
         private readonly SmtpConfig _mailserverConfiguration = mailserverOptions!;
 
-        public async Task SendEmailAsync(string to, string from, string subject, string body)
+        public async Task SendEmail(string to, string from, string subject, string body)
         {
-            var emailClient = new System.Net.Mail.SmtpClient(_mailserverConfiguration.Hostname, _mailserverConfiguration.Port);
+            var emailClient = new SmtpClient(_mailserverConfiguration.Hostname, _mailserverConfiguration.Port);
 
             var message = new MailMessage
             {
