@@ -4,7 +4,7 @@ import 'package:bill_app/domain/entities/bill.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-class BillService extends AbstractBillService {
+class BillService implements AbstractBillService {
   late final AbstractApiService apiService;
   late final AppConfig appConfig;
   late final String apiRepositoryUrl;
