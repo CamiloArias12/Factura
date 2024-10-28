@@ -18,7 +18,6 @@ namespace bill_api.Api.Controllers.Client
             {
                 return NotFound();
             }
-
             return Ok(clients);
         }
     }
