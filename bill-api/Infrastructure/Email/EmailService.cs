@@ -35,6 +35,5 @@ namespace bill_api.Infrastructure.Email
                 return false;
             }
         }
-
     }
 }

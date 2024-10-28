@@ -1,6 +1,5 @@
 namespace bill_api.Infrastructure.Email.Interfaces
 {
-
     public interface IEmailService
 
     {

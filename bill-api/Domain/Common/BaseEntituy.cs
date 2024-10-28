@@ -1,7 +1,6 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-
 namespace bill_api.Domain.Common
 {
     public class BaseEntity
@@ -9,7 +8,5 @@ namespace bill_api.Domain.Common
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
-
-
     }
 }

@@ -66,6 +66,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 var app = builder.Build();
 
+//Seeders
 using (var scope = app.Services.CreateScope())
 {
     var client = scope.ServiceProvider.GetRequiredService<ClientSeeder>();
