@@ -17,7 +17,8 @@ class BillTable extends StatelessWidget {
         columns: const [
           DataColumn(label: Text('Codigo factura')),
           DataColumn(label: Text('Cliente')),
-          DataColumn(label: Text('City')),
+          DataColumn(label: Text('Nit')),
+          DataColumn(label: Text('Ciudad')),
           DataColumn(label: Text('Total Factura')),
           DataColumn(label: Text('Subtotal')),
           DataColumn(label: Text('Iva')),
@@ -31,6 +32,7 @@ class BillTable extends StatelessWidget {
           return DataRow(cells: [
             DataCell(Text(bill.billCode)),
             DataCell(Text(getClientNameById(bill.clientId ?? "", clients))),
+            DataCell(Text(getClientNitById(bill.clientId ?? "", clients))),
             DataCell(Text(bill.city ?? 'N/A')),
             DataCell(Text(bill.billTotal?.toStringAsFixed(2) ?? 'N/A')),
             DataCell(Text(bill.subtotal?.toStringAsFixed(2) ?? 'N/A')),
