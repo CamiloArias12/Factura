@@ -1,6 +1,6 @@
-import BillPage from './ui/pages/BillPage'
-import './index.css'
+import BillPage from "./ui/pages/BillPage";
+import "./index.css";
 function App() {
-  return <div className='flex flex-col'><BillPage /></div>
+  return <BillPage />;
 }
-export default App
+export default App;

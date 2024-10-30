@@ -1,4 +1,4 @@
-export type Bill ={
+export type Bill = {
   billCode: string;
   clientId?: string;
   city?: string;
@@ -10,10 +10,12 @@ export type Bill ={
   status?: string;
   isPaid?: boolean;
   paymentDate?: string;
-}
+};
 
-export type Client= {
+export type Client = {
   id: string;
   name: string;
+  nit: string;
   email: string;
-}
+};
+
